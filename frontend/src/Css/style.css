@@ -1,0 +1,203 @@
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #777778; */
+    padding: 20px;
+   width : '2500px'
+  }
+  
+  .register-card {
+    width: 30%;               /* Keeps the width full */
+    max-width: 1200px;         /* Increase the max-width to make the red container larger */
+    padding: 60px;             /* Increase padding for more internal spacing */
+    border-radius: 8px;
+    background-color: #f3f3f6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;            /* Centers the card */
+  }
+  
+  .register-header {
+    margin-bottom: 32px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Increased from 20px */
+    width: 100%;
+  }
+
+  
+  
+  .checkbox-group {
+    display: flex; /* Ensure the checkbox and label are in a single row */
+    flex-direction: row;
+    align-items: center;
+    gap: 12px; /* Adjust gap between checkbox and label */
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    width: 20px; /* Size of the checkbox */
+    height: 20px; /* Size of the checkbox */
+    border-radius: 50%; /* Circular shape */
+    cursor: pointer;
+    background-color: white; /* White background when unchecked */
+    border: 2px solid #4CAF50; /* Border color */
+    appearance: none; /* Remove default checkbox styling */
+    margin-right: 300px;
+  }
+  
+  .checkbox-group input[type="checkbox"]:checked {
+    background-color: #4CAF50; /* Background color when checked */
+    border: 2px solid #3b82f6; /* Border color when checked */
+  }
+  
+  .checkbox-group label {
+    cursor: pointer;
+    font-size: 16px;
+    color: white; /* Change label color if needed */
+  }
+  
+  .password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-input-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Make room for the eye icon */
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #777;
+  }
+  
+  .toggle-password:focus {
+    outline: none;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .submit-button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 16px;  /* Increased padding for button */
+    background-color: #4CAF50;
+    color: white;   /* Button text color white */
+    border: none;
+    border-radius: 4px;
+    font-size: 18px; /* Increased button text size */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .submit-button:hover {
+    background-color: #ffffff;
+    color : black
+  }
+  
+  .submit-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  }
+
+
+  /* _____________________________ */
+
+  .form-group {
+    display: flex;
+    align-items: center;           /* Vertically aligns label and input */
+    justify-content: space-between; /* Places label on left and input on right */
+    width: 100%;
+    gap: 40px;  /* Gap between label and input */
+  }
+  
+  .form-group label {
+    font-size: 18px;   /* Increased label font size */
+    font-weight: 500;
+    color: white;      /* Label text color white */
+    min-width: 120px;  /* Fixed width for labels */
+    text-align: left;  /* Align text to the left */
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="password"],
+  .form-group input[type="email"] {
+    width: 100%;        /* Ensures the input takes full width */
+    max-width: 400px;   /* Limits the max width of the input */
+    padding: 14px 16px; /* Increased padding */
+    background-color: white;   /* Input background white */
+    border: 1px solid black;   /* Border color black */
+    border-radius: 4px;
+    font-size: 18px;    /* Increased input font size */
+    color: #4CAF50;       /* Input text color black */
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .form-group input[type="text"]:focus,
+  .form-group input[type="password"]:focus,
+  .form-group input[type="email"]:focus {
+    outline: none;
+    border-color: #4CAF50;  /* Changes border color to blue on focus */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .register-header h2 {
+    font-size: 32px;  /* Increased header text size */
+    font-weight: 700;
+    color: #4CAF50;     /* Header text color white */
+  }
+  
+  .login-link {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .login-link-text {
+    color: #ff7200;
+    text-decoration: none; /* Remove underline */
+    /* font-weight: bold; */
+  }
+  
+  .login-link-text:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+  
+  
+  
+  /* Responsive adjustments */
+  @media (max-width: 900px) { /* Increased breakpoint from 640px */
+    .register-card {
+      padding: 32px;
+      max-width: 100%;
+    }
+  
+    .register-header h2 {
+      font-size: 24px;
+    }
+  }
+
+  /* start your styles from here */
+
+  .home-class {
+    color:red;
+  }
