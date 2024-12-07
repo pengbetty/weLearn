@@ -6,34 +6,30 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 
-//importing cors 
+//importing cors
 const cors = require("cors");
 //using cors
 app.use(cors());
 //using urlencoded as false
 app.use(express.urlencoded({ extended: false }));
 
-
-const defineAssociations = require('./models/associations'); 
-const Program = require('./models/Program');
-const College = require('./models/College');
-
+const defineAssociations = require("./models/associations");
+const Program = require("./models/Program");
+const College = require("./models/College");
 
 defineAssociations();
 
 // Middleware
 app.use(express.json());
 
+const routes = require("./routes/routes");
 
-const routes = require('./routes/routes');
-
-
-app.use('/api', routes);
+app.use("/api", routes);
 
 //making a constant for PORT
 const PORT = 3000;
 
 //server running on 3000
 app.listen(PORT, () => {
-    console.log("Server is running on port " + PORT);
-})
+  console.log("Server is running on port " + PORT);
+});
