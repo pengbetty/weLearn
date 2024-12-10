@@ -11,6 +11,7 @@ import { Contract } from "./Components/StudentContract";
 import { CreateContract } from "./Components/CreateContract";
 import { UpdateContract } from "./Components/UpdateContract";
 import { RoleProtectedRoute } from "./Components/RoleProtectedRoute";
+import CreateStudent from "./Components/CreateStudent";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/contract" element={<Contract />} />
         <Route path="/create-contract" element={<CreateContract />} />
         <Route path="/update-contract/:id" element={<UpdateContract />} />
+        <Route path="/create-student" element={<CreateStudent />} />
       </Routes>
     </div>
   );

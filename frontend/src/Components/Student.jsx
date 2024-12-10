@@ -3,6 +3,7 @@ import axios from "axios";
 import { AppNavbar } from "./Navbar";
 import "../Css/home.css";
 import { BASE_URL } from "../../Constant/constant";
+import { Link } from "react-router-dom";
 
 export const Student = () => {
   const [students, setStudents] = useState([]);
@@ -57,9 +58,12 @@ export const Student = () => {
       <div className="container mt-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h1 className="page-title">Student Management</h1>
-          <button className="btn btn-primary btn-lg create-student-btn">
+          <Link
+            to="/create-student"
+            className="btn btn-primary btn-lg create-student-btn"
+          >
             + Create Student
-          </button>
+          </Link>
         </div>
         {loading ? (
           <p className="text-center">Loading students...</p>
