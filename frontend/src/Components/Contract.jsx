@@ -18,6 +18,7 @@ export const Contract = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
+        console.log(response, "contract");
         setContracts(response.data.contracts);
       } catch (error) {
         console.error("Error fetching contracts:", error);
@@ -85,25 +86,26 @@ export const Contract = () => {
                   <th>Actions</th>
                 </tr>
               </thead>
+
               <tbody>
                 {contracts.length > 0 ? (
                   contracts.map((contract) => (
-                    <tr key={contract.ContractID}>
-                      <td>{contract.ContractID}</td>
-                      <td>{contract.User?.displayname}</td>
-                      <td>{contract.StartDate}</td>
-                      <td>{contract.FinishDate}</td>
-                      <td>{contract.Amount}</td>
+                    <tr key={contract.contractID}>
+                      <td>{contract.contractID}</td>
+                      <td>{contract.user?.displayName}</td>
+                      <td>{contract.startDate}</td>
+                      <td>{contract.finishDate}</td>
+                      <td>{contract.amount}</td>
                       <td>
                         <button
                           className="btn btn-warning btn-sm me-2"
-                          onClick={() => handleEdit(contract.ContractID)}
+                          onClick={() => handleEdit(contract.contractID)}
                         >
                           Edit
                         </button>
                         <button
                           className="btn btn-danger btn-sm"
-                          onClick={() => handleDelete(contract.ContractID)}
+                          onClick={() => handleDelete(contract.contractID)}
                         >
                           Delete
                         </button>

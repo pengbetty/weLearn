@@ -14,7 +14,7 @@ exports.createProgram = [
     }
 
     const {
-      CollegeID,
+      collegeID,
       programName,
       programLength,
       programLevel,
@@ -31,11 +31,9 @@ exports.createProgram = [
     });
 
     if (existingProgram) {
-      return res
-        .status(400)
-        .json({
-          message: "This program name already exists for the selected college.",
-        });
+      return res.status(400).json({
+        message: "This program name already exists for the selected college.",
+      });
     }
 
     try {
@@ -49,12 +47,10 @@ exports.createProgram = [
         programRanking: programRanking || null,
       });
 
-      res
-        .status(201)
-        .json({
-          message: "Program created successfully",
-          programId: program.programID,
-        });
+      res.status(201).json({
+        message: "Program created successfully",
+        programId: program.programID,
+      });
     } catch (error) {
       res.status(500).json({ message: "Database error", error });
     }

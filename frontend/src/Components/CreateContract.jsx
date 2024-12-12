@@ -37,10 +37,10 @@ export const CreateContract = () => {
       await axios.post(
         `${BASE_URL}/api/contracts`,
         {
-          UserID: selectedUser,
-          StartDate: startDate,
-          FinishDate: endDate,
-          Amount: amount,
+          userID: selectedUser,
+          startDate: startDate,
+          finishDate: endDate,
+          amount: amount,
         },
         {
           headers: {
@@ -73,8 +73,8 @@ export const CreateContract = () => {
             >
               <option value="">Select a user</option>
               {users.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.username} ({user.email})
+                <option key={user.userId} value={user.userId}>
+                  {user.userName} ({user.email})
                 </option>
               ))}
             </select>

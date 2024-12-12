@@ -5,12 +5,12 @@ const Contract = require("../models/Contract");
 const User = require("../models/User");
 
 exports.createContract = [
-  body("UserID").notEmpty().withMessage("User ID is required"),
-  body("StartDate").notEmpty().withMessage("Start date is required"),
-  body("FinishDate").notEmpty().withMessage("Finish date is required"),
-  body("Agent").notEmpty().withMessage("Agent Name is required"),
-  body("ContractName").notEmpty().withMessage("Contract Name is required"),
-  body("Amount")
+  body("userID").notEmpty().withMessage("User ID is required"),
+  body("startDate").notEmpty().withMessage("Start date is required"),
+  body("finishDate").notEmpty().withMessage("Finish date is required"),
+  body("agent").notEmpty().withMessage("Agent Name is required"),
+  body("contractName").notEmpty().withMessage("Contract Name is required"),
+  body("amount")
     .isDecimal()
     .withMessage("Amount must be a valid decimal value"),
 
@@ -20,7 +20,8 @@ exports.createContract = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { UserID, StartDate, FinishDate, Agent, Amount } = req.body;
+    const { userID, contractName, startDate, finishDate, agent, amount } =
+      req.body;
 
     try {
       const existingContract = await Contract.findOne({
@@ -35,11 +36,12 @@ exports.createContract = [
       }
 
       const contract = await Contract.create({
-        UserID,
-        StartDate,
-        FinishDate,
-        Agent,
-        Amount,
+        userID,
+        contractName,
+        startDate,
+        finishDate,
+        agent,
+        amount,
       });
 
       res.status(201).json({
@@ -59,7 +61,7 @@ exports.listContracts = [
         include: [
           {
             model: User,
-            attributes: ["username", "displayname", "email"],
+            attributes: ["userName", "displayName", "email"],
           },
         ],
       });
@@ -78,24 +80,24 @@ exports.listContracts = [
 ];
 
 exports.updateContract = [
-  body("StartDate").optional().notEmpty().withMessage("Start date is required"),
-  body("FinishDate")
+  body("startDate").optional().notEmpty().withMessage("Start date is required"),
+  body("finishDate")
     .optional()
     .notEmpty()
     .withMessage("Finish date is required"),
-  body("Amount")
+  body("amount")
     .optional()
     .isDecimal()
     .withMessage("Amount must be a valid decimal value"),
-  body("ContractName")
+  body("contractName")
     .optional()
     .notEmpty()
     .withMessage("Contract Name is required."),
-  body("Agent").optional().notEmpty().withMessage("Agent Name is required."),
+  body("agent").optional().notEmpty().withMessage("Agent Name is required."),
 
   async (req, res) => {
     const { id } = req.params;
-    const { StartDate, FinishDate, Amount } = req.body;
+    const { startDate, finishDate, amount } = req.body;
 
     try {
       const contract = await Contract.findByPk(id);
@@ -104,7 +106,7 @@ exports.updateContract = [
         return res.status(404).json({ message: "Contract not found" });
       }
 
-      await contract.update({ StartDate, FinishDate, Amount });
+      await contract.update({ startDate, finishDate, amount });
       res
         .status(200)
         .json({ message: "Contract updated successfully", contract });

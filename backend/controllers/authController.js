@@ -7,7 +7,7 @@ const User = require("../models/User");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 exports.signup = [
-  body("username").notEmpty(),
+  body("userName").notEmpty(),
   body("displayName").notEmpty(),
   body("email").isEmail(),
   body("password").isLength({ min: 6 }),
@@ -40,7 +40,7 @@ exports.signup = [
         }
 
         const query =
-          "INSERT INTO users (username, displayname, email, password, role) VALUES (?, ?, ?, ?, ?)";
+          "INSERT INTO user (userName, displayName, email, password, role) VALUES (?, ?, ?, ?, ?)";
         db.query(
           query,
           [userName, displayName, email, hashedPassword, role],
@@ -69,7 +69,7 @@ exports.login = [
 
     const { email, password } = req.body;
 
-    const query = "SELECT * FROM users WHERE email = ?";
+    const query = "SELECT * FROM user WHERE email = ?";
     db.query(query, [email], (err, results) => {
       if (err) {
         return res
@@ -93,14 +93,14 @@ exports.login = [
           return res.status(401).json({ message: "Invalid email or password" });
         }
         const token = jwt.sign(
-          { userId: user.id, username: user.username, role: user.role },
+          { userId: user.id, userName: user.userName, role: user.role },
           JWT_SECRET,
           { expiresIn: "1h" }
         );
         res.status(200).json({
           message: "Login successful",
           token,
-          user: { username: user.username, role: user.role },
+          user: { userName: user.userName, role: user.role },
         });
       });
     });

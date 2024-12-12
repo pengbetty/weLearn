@@ -66,4 +66,27 @@ router.delete(
   verifyToken(["agent", "admin"]),
   ContractController.deleteContract
 );
+
+router.post(
+  "/colleges",
+  verifyToken(["admin", "agent"]),
+  CollegeController.createCollege
+);
+
+router.get("/listcolleges", CollegeController.listColleges);
+
+router.get("/colleges/:id", CollegeController.getCollegeById);
+
+router.put(
+  "/colleges/:id",
+  verifyToken(["admin", "agent"]),
+  CollegeController.updateCollege
+);
+
+router.delete(
+  "/colleges/:id",
+  verifyToken(["admin", "agent"]),
+  CollegeController.deleteCollege
+);
+
 module.exports = router;

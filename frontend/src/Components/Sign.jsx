@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../Css/style.css';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { BASE_URL } from '../../Constant/constant';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "../Css/style.css";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { BASE_URL } from "../../Constant/constant";
 
 export const Sign = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    displayName: '',
-    password: '',
-    confirmPassword: '',
-    email: '',
+    userName: "",
+    displayName: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
     role: false,
   });
 
@@ -36,52 +36,58 @@ export const Sign = () => {
     if (formData.password !== formData.confirmPassword) {
       Swal.fire({
         icon: "warning",
-        title: 'Passwords Do Not Match',
-        text: 'Please make sure both passwords are the same.',
-        icon: 'error',
-        confirmButtonText: 'OK'
+        title: "Passwords Do Not Match",
+        text: "Please make sure both passwords are the same.",
+        icon: "error",
+        confirmButtonText: "OK",
       });
       return;
     }
 
     try {
       console.log(formData);
-      const { username, displayName, password, email, role } = formData;
-      const Response = await axios.post(`${BASE_URL}/api/signup`, { username, displayName, password, email, isStudent: role })
-      console.log(Response)
+      const { userName, displayName, password, email, role } = formData;
+      const Response = await axios.post(`${BASE_URL}/api/signup`, {
+        userName,
+        displayName,
+        password,
+        email,
+        isStudent: role,
+      });
+      console.log(Response);
       if (Response.status === 201) {
         Swal.fire({
           icon: "success",
-          title: 'Register Successful!',
-          text: 'Welcome To WeLearn',
-          icon: 'success',
-          confirmButtonText: 'OK'
+          title: "Register Successful!",
+          text: "Welcome To WeLearn",
+          icon: "success",
+          confirmButtonText: "OK",
         });
       } else {
         Swal.fire({
-          icon: 'error',
-          title: 'Register Failed',
-          text: 'Try Again',
-          icon: 'error',
-          confirmButtonText: 'Try Again'
+          icon: "error",
+          title: "Register Failed",
+          text: "Try Again",
+          icon: "error",
+          confirmButtonText: "Try Again",
         });
       }
       setFormData({
-        username: '',
-        displayName: '',
-        password: '',
-        confirmPassword: '',
-        email: '',
+        userName: "",
+        displayName: "",
+        password: "",
+        confirmPassword: "",
+        email: "",
         role: false,
-      })
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       Swal.fire({
-        icon: 'error',
-        title: 'Error Occurred',
+        icon: "error",
+        title: "Error Occurred",
         text: error.response.data.message || "failed due to server",
-        icon: 'error',
-        confirmButtonText: 'OK'
+        icon: "error",
+        confirmButtonText: "OK",
       });
     }
   };
@@ -94,12 +100,12 @@ export const Sign = () => {
         </div>
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Username: </label>
+            <label htmlFor="userName">Username: </label>
             <input
               type="text"
-              name="username"
-              id="username"
-              value={formData.username}
+              name="userName"
+              id="userName"
+              value={formData.userName}
               onChange={handleChange}
               required
             />
@@ -158,7 +164,9 @@ export const Sign = () => {
           </div>
 
           <div className="form-group checkbox-group">
-            <label htmlFor="role" className="checkbox-label">Student: </label>
+            <label htmlFor="role" className="checkbox-label">
+              Student:{" "}
+            </label>
             <input
               type="checkbox"
               name="role"
@@ -166,7 +174,6 @@ export const Sign = () => {
               checked={formData.role}
               onChange={handleRoleChange}
             />
-
           </div>
 
           <button type="submit" className="submit-button">
@@ -176,7 +183,7 @@ export const Sign = () => {
 
         <div className="login-link">
           <p>
-            Already Registered?{' '}
+            Already Registered?{" "}
             <Link to="/login" className="login-link-text">
               Login
             </Link>
@@ -186,7 +193,6 @@ export const Sign = () => {
     </div>
   );
 };
-
 
 /*
 import React, { useState } from 'react';

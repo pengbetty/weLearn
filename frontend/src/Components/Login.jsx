@@ -32,10 +32,10 @@ export const Login = () => {
         email,
         password,
       });
-      console.log(Response);
       if (Response.status === 200) {
         const token = Response.data.token;
         console.log(Response.data.user.role);
+        console.log(Response.data.user, "user");
         localStorage.setItem("token", token);
         localStorage.setItem("role", Response.data.user.role);
         Swal.fire({

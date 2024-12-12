@@ -7,22 +7,22 @@ const CreateStudent = () => {
   const [selectedContract, setSelectedContract] = useState(null);
   const [schools, setSchools] = useState([]);
   const [formData, setFormData] = useState({
-    Stu1stName: "",
-    StuLastName: "",
-    StuEmail: "",
-    StuPhone: "",
-    StuCurrentSchID: "",
-    StuGradSchID: "",
-    StuDOB: "",
-    StuCategory: "NA",
-    AppLevel: "",
-    AppCountry: "",
-    StuGPA: "",
-    StuStreet: "",
-    StuCity: "",
-    StuState: "",
+    stu1stName: "",
+    stuLastName: "",
+    stuEmail: "",
+    stuPhone: "",
+    stuCurrentSchID: "",
+    stuGradSchID: "",
+    stuDOB: "",
+    stuCategory: "NA",
+    sppLevel: "",
+    appCountry: "",
+    stuGPA: "",
+    stuStreet: "",
+    stuCity: "",
+    stuState: "",
     StuPostcode: "",
-    ContractID: "",
+    contractID: "",
   });
 
   const [loading, setLoading] = useState(true);
