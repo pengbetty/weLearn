@@ -18,10 +18,10 @@ exports.signup = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { username, displayName, email, password, isStudent } = req.body;
+    const { userName, displayName, email, password, isStudent } = req.body;
     const role = isStudent ? "student" : "agent";
 
-    const checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+    const checkEmailQuery = "SELECT * FROM user WHERE email = ?";
     db.query(checkEmailQuery, [email], (err, results) => {
       if (err) {
         return res
@@ -43,7 +43,7 @@ exports.signup = [
           "INSERT INTO users (username, displayname, email, password, role) VALUES (?, ?, ?, ?, ?)";
         db.query(
           query,
-          [username, displayName, email, hashedPassword, role],
+          [userName, displayName, email, hashedPassword, role],
           (err, result) => {
             if (err) {
               return res.status(500).json({ message: err });
@@ -113,7 +113,7 @@ exports.listStudents = async (req, res) => {
       where: {
         role: "student",
       },
-      attributes: ["id", "username", "displayname", "email", "created_at"],
+      attributes: ["userId", "userName", "displayName", "email", "created_at"],
     });
 
     if (students.length === 0) {

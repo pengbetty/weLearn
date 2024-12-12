@@ -27,6 +27,7 @@ export const Login = () => {
 
     try {
       const { email, password } = formData;
+      console.log(email);
       const Response = await axios.post(`${BASE_URL}/api/login`, {
         email,
         password,

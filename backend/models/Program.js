@@ -1,20 +1,26 @@
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/sequelize");
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize'); 
-
-const Program = sequelize.define('Program', {
-  PID: { type: DataTypes.SMALLINT, autoIncrement: true, primaryKey: true },
-  ColID: { type: DataTypes.SMALLINT, allowNull: false },
-  PName: { type: DataTypes.STRING(100), allowNull: false },
-  PLength: { type: DataTypes.STRING(50) },
-  PLevel: { type: DataTypes.STRING(50) },
-  Link: { type: DataTypes.STRING(100) },
-  AppDeadline: { type: DataTypes.DATE },
-  PRanking: { type: DataTypes.INTEGER }
-}, {
-  tableName: 'Program',
-  timestamps: false
-});
-
+const Program = sequelize.define(
+  "program",
+  {
+    programID: {
+      type: DataTypes.SMALLINT,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    collegeID: { type: DataTypes.SMALLINT, allowNull: false },
+    programName: { type: DataTypes.STRING(100), allowNull: false },
+    programLength: { type: DataTypes.STRING(50) },
+    programLevel: { type: DataTypes.STRING(50) },
+    programLink: { type: DataTypes.STRING(100) },
+    appDeadline: { type: DataTypes.DATE },
+    programRanking: { type: DataTypes.INTEGER },
+  },
+  {
+    tableName: "program",
+    timestamps: false,
+  }
+);
 
 module.exports = Program;

@@ -1,22 +1,30 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/sequelize");
 
-const College = sequelize.define('College', {
-  ID: { type: DataTypes.SMALLINT, autoIncrement: true, primaryKey: true },
-  USRanking: { type: DataTypes.SMALLINT },
-  Name: { type: DataTypes.STRING(100), allowNull: false },
-  City: { type: DataTypes.STRING(50) },
-  State: { type: DataTypes.STRING(50) },
-  Country: { type: DataTypes.STRING(50) },
-  Link: { type: DataTypes.STRING(100) },
-  UGNumber: { type: DataTypes.SMALLINT },
-  PGNumber: { type: DataTypes.SMALLINT },
-  RMK: { type: DataTypes.TEXT },
-  Environment: { type: DataTypes.ENUM('Rural', 'Urban', 'Suburb') },
-  QSRanking: { type: DataTypes.SMALLINT }
-}, {
-  tableName: 'College',
-  timestamps: false
-});
+const College = sequelize.define(
+  "college",
+  {
+    collegeID: {
+      type: DataTypes.SMALLINT,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    usRanking: { type: DataTypes.SMALLINT },
+    collegeName: { type: DataTypes.STRING(100), allowNull: false },
+    city: { type: DataTypes.STRING(50) },
+    state: { type: DataTypes.STRING(50) },
+    country: { type: DataTypes.STRING(50) },
+    link: { type: DataTypes.STRING(100) },
+    ugNumber: { type: DataTypes.SMALLINT },
+    pgNumber: { type: DataTypes.SMALLINT },
+    rmk: { type: DataTypes.TEXT },
+    environment: { type: DataTypes.ENUM("Rural", "Urban", "Suburb") },
+    qsRanking: { type: DataTypes.SMALLINT },
+  },
+  {
+    tableName: "college",
+    timestamps: false,
+  }
+);
 
 module.exports = College;

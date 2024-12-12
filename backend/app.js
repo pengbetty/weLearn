@@ -21,7 +21,6 @@ defineAssociations();
 
 // Middleware
 app.use(express.json());
-
 const routes = require("./routes/routes");
 
 app.use("/api", routes);

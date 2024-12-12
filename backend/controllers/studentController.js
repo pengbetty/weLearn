@@ -7,15 +7,16 @@ exports.listStudents = async (req, res) => {
   try {
     const students = await Student.findAll({
       attributes: [
-        "StuID",
-        "Stu1stName",
-        "StuLastName",
-        "StuEmail",
-        "StuPhone",
-        "StuDOB",
-        "AppLevel",
-        "StuCity",
-        "StuState",
+        "stuID",
+        "stu1stName",
+        "stuMidName",
+        "stuLastName",
+        "stuEmail",
+        "stuPhone",
+        "stuDOB",
+        "appLevel",
+        "stuCity",
+        "stuState",
       ],
     });
 
@@ -26,45 +27,48 @@ exports.listStudents = async (req, res) => {
 };
 
 exports.createStudent = [
-  body("Stu1stName")
+  body("stu1stName")
     .notEmpty()
     .withMessage("First name is required")
     .isString()
     .withMessage("First name must be a string")
     .isLength({ max: 10 })
     .withMessage("First name must not exceed 10 characters"),
-  body("StuLastName")
+
+  body("stuLastName")
     .notEmpty()
     .withMessage("Last name is required")
     .isString()
     .withMessage("Last name must be a string")
     .isLength({ max: 10 })
     .withMessage("Last name must not exceed 10 characters"),
-  body("StuEmail")
+
+  body("stuEmail")
     .notEmpty()
     .withMessage("Email is required")
     .isEmail()
     .withMessage("Invalid email format")
     .custom(async (value) => {
-      const student = await Student.findOne({ where: { StuEmail: value } });
+      const student = await Student.findOne({ where: { stuEmail: value } });
       if (student) {
         throw new Error("Email already exists");
       }
     }),
-  body("StuPhone")
+  body("stuPhone")
     .optional()
     .isString()
     .isLength({ max: 15 })
     .withMessage("Phone number must not exceed 15 characters")
     .custom(async (value) => {
       if (value) {
-        const student = await Student.findOne({ where: { StuPhone: value } });
+        const student = await Student.findOne({ where: { stuPhone: value } });
         if (student) {
           throw new Error("Phone number already exists");
         }
       }
     }),
-  body("StuCurrentSchID")
+
+  body("stuCurrentSchID")
     .optional()
     .custom(async (value) => {
       if (value) {
@@ -74,7 +78,7 @@ exports.createStudent = [
         }
       }
     }),
-  body("StuGradSchID")
+  body("stuGradSchID")
     .optional()
     .custom(async (value) => {
       if (value) {
@@ -84,20 +88,20 @@ exports.createStudent = [
         }
       }
     }),
-  body("StuCategory")
+  body("stuCategory")
     .optional()
     .isIn(["A", "B", "C", "NA"])
     .withMessage("Invalid student category"),
-  body("StuDOB").optional().isDate().withMessage("Invalid date format"),
-  body("AppLevel")
+  body("stuDOB").optional().isDate().withMessage("Invalid date format"),
+  body("appLevel")
     .optional()
     .isIn(["UG", "G", "PG", "PhD", "HS", "S", "AS", "C", "O"])
     .withMessage("Invalid application level"),
-  body("AppCountry")
+  body("appCountry")
     .optional()
     .isIn(["US", "GB", "CA", "AU"])
     .withMessage("Invalid country"),
-  body("ContractID")
+  body("contractID")
     .notEmpty()
     .withMessage("Contract ID is required")
     .isInt()
@@ -116,50 +120,50 @@ exports.createStudent = [
     }
 
     const {
-      Stu1stName,
-      StuLastName,
-      StuEmail,
-      StuPhone,
-      StuCurrentSchID,
-      StuGradSchID,
-      StuDOB,
-      StuCategory = "NA",
-      StuPrefName,
-      StuMidName,
-      StuGender,
-      StuComments,
-      AppLevel,
-      AppCountry,
-      StuGPA,
-      StuStreet,
-      StuCity,
-      StuState,
-      StuPostcode,
-      ContractID,
+      stu1stName,
+      stuMidName,
+      stuLastName,
+      stuEmail,
+      stuPhone,
+      stuCurrentSchID,
+      stuGradSchID,
+      stuDOB,
+      stuCategory = "NA",
+      stuPrefName,
+      stuGender,
+      stuComments,
+      appLevel,
+      appCountry,
+      stuGPA,
+      stuStreet,
+      stuCity,
+      stuState,
+      stuPostcode,
+      contractID,
     } = req.body;
 
     try {
       const student = await Student.create({
-        Stu1stName,
-        StuLastName,
-        StuEmail,
-        StuPhone: StuPhone || null,
-        StuCurrentSchID: StuCurrentSchID || null,
-        StuGradSchID: StuGradSchID || null,
-        StuDOB: StuDOB || null,
-        StuCategory,
-        StuPrefName: StuPrefName || null,
-        StuMidName: StuMidName || null,
-        StuGender: StuGender || null,
-        StuComments: StuComments || null,
-        AppLevel: AppLevel || null,
-        AppCountry: AppCountry || null,
-        StuGPA: StuGPA || null,
-        StuStreet: StuStreet || null,
-        StuCity: StuCity || null,
-        StuState: StuState || null,
-        StuPostcode: StuPostcode || null,
-        ContractID,
+        stu1stName,
+        stuLastName,
+        stuEmail,
+        stuPhone: stuPhone || null,
+        stuCurrentSchID: stuCurrentSchID || null,
+        stuGradSchID: stuGradSchID || null,
+        stuDOB: stuDOB || null,
+        stuCategory,
+        stuPrefName: stuPrefName || null,
+        stuMidName: stuMidName || null,
+        stuGender: stuGender || null,
+        stuComments: stuComments || null,
+        appLevel: appLevel || null,
+        appCountry: appCountry || null,
+        stuGPA: stuGPA || null,
+        stuStreet: stuStreet || null,
+        stuCity: stuCity || null,
+        stuState: stuState || null,
+        stuPostcode: stuPostcode || null,
+        contractID,
       });
 
       res.status(201).json({

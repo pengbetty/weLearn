@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS `WeLearn` CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_bin;
 USE `WeLearn`;
 
-Drop procedure CalculateTotalAmount
+Drop procedure CalculateTotalAmount;
 
 DROP TABLE IF EXISTS `Stu_School`;
 DROP TABLE IF EXISTS `Stu_Relationship`;

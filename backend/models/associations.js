@@ -4,10 +4,10 @@ const User = require("./User");
 const Contract = require("./Contract");
 
 const defineAssociations = () => {
-  College.hasMany(Program, { foreignKey: "ColID" });
-  Program.belongsTo(College, { foreignKey: "ColID" });
-  User.hasMany(Contract, { foreignKey: "UserID" });
-  Contract.belongsTo(User, { foreignKey: "UserID" });
+  College.hasMany(Program, { foreignKey: "collegeID" });
+  Program.belongsTo(College, { foreignKey: "collegeID" });
+  User.hasMany(Contract, { foreignKey: "userID" });
+  Contract.belongsTo(User, { foreignKey: "userID" });
 };
 
 module.exports = defineAssociations;

@@ -8,6 +8,8 @@ exports.createContract = [
   body("UserID").notEmpty().withMessage("User ID is required"),
   body("StartDate").notEmpty().withMessage("Start date is required"),
   body("FinishDate").notEmpty().withMessage("Finish date is required"),
+  body("Agent").notEmpty().withMessage("Agent Name is required"),
+  body("ContractName").notEmpty().withMessage("Contract Name is required"),
   body("Amount")
     .isDecimal()
     .withMessage("Amount must be a valid decimal value"),
@@ -18,24 +20,25 @@ exports.createContract = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { UserID, StartDate, FinishDate, Amount } = req.body;
-
-    const existingContract = await Contract.findOne({
-      where: { UserID, StartDate, FinishDate },
-    });
-
-    if (existingContract) {
-      return res.status(400).json({
-        message:
-          "A contract already exists for this user within the specified dates.",
-      });
-    }
+    const { UserID, StartDate, FinishDate, Agent, Amount } = req.body;
 
     try {
+      const existingContract = await Contract.findOne({
+        where: { UserID, StartDate, FinishDate },
+      });
+
+      if (existingContract) {
+        return res.status(400).json({
+          message:
+            "A contract already exists for this user within the specified dates.",
+        });
+      }
+
       const contract = await Contract.create({
         UserID,
         StartDate,
         FinishDate,
+        Agent,
         Amount,
       });
 
@@ -84,6 +87,11 @@ exports.updateContract = [
     .optional()
     .isDecimal()
     .withMessage("Amount must be a valid decimal value"),
+  body("ContractName")
+    .optional()
+    .notEmpty()
+    .withMessage("Contract Name is required."),
+  body("Agent").optional().notEmpty().withMessage("Agent Name is required."),
 
   async (req, res) => {
     const { id } = req.params;
