@@ -25,7 +25,7 @@ exports.createContract = [
 
     try {
       const existingContract = await Contract.findOne({
-        where: { UserID, StartDate, FinishDate },
+        where: { userID, startDate, finishDate },
       });
 
       if (existingContract) {
@@ -46,7 +46,7 @@ exports.createContract = [
 
       res.status(201).json({
         message: "Contract created successfully",
-        contractId: contract.ContractID,
+        contractId: contract.contractID,
       });
     } catch (error) {
       res.status(500).json({ message: "Database error", error });
@@ -97,7 +97,7 @@ exports.updateContract = [
 
   async (req, res) => {
     const { id } = req.params;
-    const { startDate, finishDate, amount } = req.body;
+    const { startDate, finishDate, amount, agent } = req.body;
 
     try {
       const contract = await Contract.findByPk(id);
@@ -106,7 +106,7 @@ exports.updateContract = [
         return res.status(404).json({ message: "Contract not found" });
       }
 
-      await contract.update({ startDate, finishDate, amount });
+      await contract.update({ startDate, finishDate, amount, agent });
       res
         .status(200)
         .json({ message: "Contract updated successfully", contract });

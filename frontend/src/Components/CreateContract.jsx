@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AppNavbar } from "./Navbar";
+//import { AppNavbar } from "./Navbar";
 import "../Css/form.css";
 import { BASE_URL } from "../../Constant/constant";
 
@@ -58,7 +58,7 @@ export const CreateContract = () => {
 
   return (
     <>
-      <AppNavbar />
+      {/* <AppNavbar /> */}
 
       <div className="container mt-5">
         <h1 className="page-title">Create Contract</h1>

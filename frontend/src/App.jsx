@@ -7,7 +7,7 @@ import { Student } from "./Components/Student";
 import { Contract } from "./Components/Contract";
 import { CreateContract } from "./Components/CreateContract";
 import { UpdateContract } from "./Components/UpdateContract";
-// import { RoleProtectedRoute } from "./Components/RoleProtectedRoute";
+//import { RoleProtectedRoute } from "./Components/RoleProtectedRoute";
 import CreateStudent from "./Components/CreateStudent";
 import { Colleges } from "./Components/Colleges";
 import CreateCollege from "./Components/CreateCollege";

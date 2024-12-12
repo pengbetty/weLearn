@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "../Css/AppNavbar.css";
 
 export const AppNavbar = () => {
   const navigate = useNavigate();
@@ -126,10 +127,10 @@ export const AppNavbar = () => {
             </button>
           ) : (
             <>
-              <a className="btn btn-outline-primary me-2" href="/login">
+              <a className="btn btn-outline-success me-2" href="/login">
                 Login
               </a>
-              <a className="btn btn-primary" href="/sign">
+              <a className="btn btn-outline-success" href="/sign">
                 Sign Up
               </a>
             </>
