@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/pengbetty/weLearn/issues"
   },
-  "homepage": "https://github.com/pengbetty/weLearn#readme",
+  "homepage": "/frontend",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
