@@ -21,7 +21,7 @@ exports.createContract = [
 
     const { userID, contractName, startDate, finishDate, amount } = req.body;
 
-    const agentName = req.user?.name || "Unknown Agent";
+    const agentName = req.user?.userName || "Unknown Agent";
 
     try {
       const existingContract = await Contract.findOne({
