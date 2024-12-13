@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/pengbetty/weLearn/issues"
   },
-  "homepage": "/frontend",
+  "homepage": "https://we-learn-phi.vercel.app/",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
