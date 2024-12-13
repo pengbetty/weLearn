@@ -1,0 +1,55 @@
+.navbar-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 0 10px;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.student-btn {
+  background-color: #007bff;
+}
+
+.student-btn:hover {
+  background-color: #0056b3;
+}
+
+.contract-btn {
+  background-color: #28a745;
+}
+
+.contract-btn:hover {
+  background-color: #218838;
+}
+
+.navbar-brand {
+  background-color: #4caf50 !important;
+  padding: 20px 40px !important;
+  color: #fff !important;
+  font-size: 30px !important;
+}
+
+
+/* 
+.signup-btn {
+  background-color: #42cf50
+}
+  
+.signup-btn:hover{
+  background-color: #42cf50
+}
+   */
