@@ -1,12 +1,40 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import "../Css/home.css";
-import "../Css/college.css";
 import { BASE_URL } from "../../Constant/constant";
+import "../Css/form.css";
 
 export const UpdateCollegeModal = ({ college, onClose, onUpdate }) => {
-  const [formData, setFormData] = useState({ ...college });
+  const [formData, setFormData] = useState({
+    collegeName: "",
+    city: "",
+    state: "",
+    country: "",
+    usRanking: "",
+    qsRanking: "",
+    environment: "Urban",
+    ugNumber: "",
+    pgNumber: "",
+    collegeLink: "",
+  });
+
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (college) {
+      setFormData({
+        collegeName: college.collegeName || "",
+        city: college.city || "",
+        state: college.state || "",
+        country: college.country || "",
+        usRanking: college.usRanking || "",
+        qsRanking: college.qsRanking || "",
+        environment: college.environment || "Urban",
+        ugNumber: college.ugNumber || "",
+        pgNumber: college.pgNumber || "",
+        collegeLink: college.collegeLink || "",
+      });
+    }
+  }, [college]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,9 +44,10 @@ export const UpdateCollegeModal = ({ college, onClose, onUpdate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
       const response = await axios.put(
-        `${BASE_URL}/api/colleges/${college.ID}`,
+        `${BASE_URL}/api/colleges/${college.collegeID}`,
         formData,
         {
           headers: {
@@ -40,42 +69,56 @@ export const UpdateCollegeModal = ({ college, onClose, onUpdate }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>Update College</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="update-form">
           <input
             type="text"
-            name="Name"
-            value={formData.Name}
+            name="collegeName"
+            value={formData.collegeName}
             onChange={handleInputChange}
             placeholder="College Name"
             required
           />
           <input
             type="text"
-            name="City"
-            value={formData.City}
+            name="city"
+            value={formData.city}
             onChange={handleInputChange}
             placeholder="City"
             required
           />
           <input
             type="text"
-            name="State"
-            value={formData.State}
+            name="state"
+            value={formData.state}
             onChange={handleInputChange}
             placeholder="State"
             required
           />
           <input
             type="text"
-            name="Country"
-            value={formData.Country}
+            name="country"
+            value={formData.country}
             onChange={handleInputChange}
             placeholder="Country"
             required
           />
+          <input
+            type="number"
+            name="usRanking"
+            value={formData.usRanking}
+            onChange={handleInputChange}
+            placeholder="US Ranking"
+          />
+          <input
+            type="number"
+            name="qsRanking"
+            value={formData.qsRanking}
+            onChange={handleInputChange}
+            placeholder="QS Ranking"
+          />
           <select
-            name="Environment"
-            value={formData.Environment}
+            name="environment"
+            value={formData.environment}
             onChange={handleInputChange}
             required
           >
@@ -83,12 +126,28 @@ export const UpdateCollegeModal = ({ college, onClose, onUpdate }) => {
             <option value="Rural">Rural</option>
             <option value="Suburb">Suburb</option>
           </select>
-          <textarea
-            name="RMK"
-            value={formData.RMK}
+          <input
+            type="number"
+            name="ugNumber"
+            value={formData.ugNumber}
             onChange={handleInputChange}
-            placeholder="Remarks"
+            placeholder="Number of Undergraduate Students"
           />
+          <input
+            type="number"
+            name="pgNumber"
+            value={formData.pgNumber}
+            onChange={handleInputChange}
+            placeholder="Number of Postgraduate Students"
+          />
+          <input
+            type="url"
+            name="collegeLink"
+            value={formData.collegeLink}
+            onChange={handleInputChange}
+            placeholder="Website Link"
+          />
+
           <button type="submit" disabled={loading}>
             {loading ? "Updating..." : "Update"}
           </button>

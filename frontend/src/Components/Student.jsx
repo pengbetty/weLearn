@@ -43,7 +43,7 @@ export const Student = () => {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         });
-        setStudents(students.filter((student) => student.StuID !== studentId));
+        setStudents(students.filter((student) => student.stuID !== studentId));
         alert("Student deleted successfully.");
       } catch (error) {
         console.error("Error deleting student:", error);
@@ -82,22 +82,22 @@ export const Student = () => {
               <tbody>
                 {students.length > 0 ? (
                   students.map((student) => (
-                    <tr key={student.StuID}>
-                      <td>{student.StuID}</td>
-                      <td>{student.Stu1stName}</td>
-                      <td>{student.StuLastName}</td>
-                      <td>{student.StuEmail}</td>
-                      <td>{student.StuPhone}</td>
+                    <tr key={student.stuID}>
+                      <td>{student.stuID}</td>
+                      <td>{student.stu1stName}</td>
+                      <td>{student.stuLastName}</td>
+                      <td>{student.stuEmail}</td>
+                      <td>{student.stuPhone}</td>
                       <td>
                         <button
                           className="btn btn-warning btn-sm me-2"
-                          onClick={() => handleEdit(student.StuID)}
+                          onClick={() => handleEdit(student.stuID)}
                         >
                           Edit
                         </button>
                         <button
                           className="btn btn-danger btn-sm"
-                          onClick={() => handleDelete(student.StuID)}
+                          onClick={() => handleDelete(student.stuID)}
                         >
                           Delete
                         </button>

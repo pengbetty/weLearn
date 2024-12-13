@@ -69,6 +69,7 @@ export const AppNavbar = () => {
                   College
                 </Link>
               </li>
+
               <li className="nav-item" style={{ margin: "0 10px" }}>
                 <Link
                   className="nav-link btn"
@@ -117,6 +118,32 @@ export const AppNavbar = () => {
                   }
                 >
                   Contract
+                </Link>
+              </li>
+
+              <li className="nav-item" style={{ margin: "0 10px" }}>
+                <Link
+                  className="nav-link btn"
+                  to="/profile"
+                  style={{
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    backgroundColor: "#007BFF",
+                    color: "#fff",
+                    textDecoration: "none",
+                    transition: "background-color 0.3s ease",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  }}
+                  onMouseOver={(e) =>
+                    (e.target.style.backgroundColor = "#0056b3")
+                  }
+                  onMouseOut={(e) =>
+                    (e.target.style.backgroundColor = "#007BFF")
+                  }
+                >
+                  Profile
                 </Link>
               </li>
             </ul>

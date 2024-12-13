@@ -93,7 +93,7 @@ exports.login = [
           return res.status(401).json({ message: "Invalid email or password" });
         }
         const token = jwt.sign(
-          { userId: user.id, userName: user.userName, role: user.role },
+          { userId: user.userId, userName: user.userName, role: user.role },
           JWT_SECRET,
           { expiresIn: "1h" }
         );
@@ -123,6 +123,34 @@ exports.listStudents = async (req, res) => {
     res.status(200).json({ students });
   } catch (error) {
     console.error("Error fetching students:", error);
+    res.status(500).json({ message: "Database error", error });
+  }
+};
+
+exports.getProfile = async (req, res) => {
+  try {
+    console.log(req.user);
+    const { userId } = req.user;
+
+    const user = await User.findOne({
+      where: { userId },
+      attributes: [
+        "userId",
+        "userName",
+        "displayName",
+        "email",
+        "role",
+        "created_at",
+      ],
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ profile: user });
+  } catch (error) {
+    console.error("Error fetching profile:", error);
     res.status(500).json({ message: "Database error", error });
   }
 };

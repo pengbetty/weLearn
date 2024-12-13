@@ -89,4 +89,10 @@ router.delete(
   CollegeController.deleteCollege
 );
 
+router.get(
+  "/profile",
+  verifyToken(["student", "agent", "admin"]),
+  authController.getProfile
+);
+
 module.exports = router;

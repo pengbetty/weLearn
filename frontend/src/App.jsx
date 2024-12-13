@@ -12,6 +12,7 @@ import CreateStudent from "./Components/CreateStudent";
 import { Colleges } from "./Components/Colleges";
 import CreateCollege from "./Components/CreateCollege";
 import { AppNavbar } from "./Components/Navbar";
+import Profile from "./Components/Profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/sign" element={<Sign />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Home />} />
         <Route path="/student" element={<Student />} />
         <Route path="/colleges" element={<Colleges />} />
