@@ -4,7 +4,7 @@ import "../Css/style.css";
 import { BASE_URL } from "../../Constant/constant";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { AppNavbar } from "./Navbar";
+
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -65,7 +65,6 @@ export const Login = () => {
 
   return (
     <>
-      <AppNavbar />
       <div className="register-container">
         <div className="register-card">
           <div className="register-header">

@@ -9,24 +9,23 @@ export const Contract = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchContracts = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/contracts`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        console.log(response, "contract");
-        setContracts(response.data.contracts);
-      } catch (error) {
-        console.error("Error fetching contracts:", error);
-        alert("Failed to fetch contracts. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchContracts = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/contracts`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setContracts(response.data.contracts);
+    } catch (error) {
+      console.error("Error fetching contracts:", error);
+      alert("Failed to fetch contracts. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchContracts();
   }, []);
 
@@ -42,8 +41,8 @@ export const Contract = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        setContracts(
-          contracts.filter((contract) => contract.ContractID !== contractId)
+        setContracts((prevContracts) =>
+          prevContracts.filter((contract) => contract.contractID !== contractId)
         );
         alert("Contract deleted successfully.");
       } catch (error) {

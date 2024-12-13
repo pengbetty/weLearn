@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "../Css/home.css";
 import { BASE_URL } from "../../Constant/constant";
 
 export const Home = () => {
   const [formData, setFormData] = useState({
-    programLevel: "",
-    country: "",
+    programLevel: "UG",
+    country: "US",
     programName: "",
   });
   const [collegeSearch, setCollegeSearch] = useState("");
@@ -14,6 +14,17 @@ export const Home = () => {
   const [colleges, setColleges] = useState([]);
   const [showProgramModal, setShowProgramModal] = useState(false);
   const [showCollegeModal, setShowCollegeModal] = useState(false);
+
+  useEffect(() => {
+    const defaultInputs = document.querySelectorAll(
+      "input[name='programLevel'], input[name='country']"
+    );
+    defaultInputs.forEach((input) => {
+      if (input.value === "UG" || input.value === "US") {
+        input.checked = true;
+      }
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +43,7 @@ export const Home = () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/programs`, {
         params: {
-          programLevel: formData.PLevel,
+          programLevel: formData.programLevel,
           country: formData.country,
           programName: formData.programName,
         },
@@ -202,7 +213,7 @@ export const Home = () => {
 
       {showProgramModal && (
         <div className="modal fade show d-block" tabIndex="-1" role="dialog">
-          <div className="modal-dialog modal-lg" role="document">
+          <div className="modal-dialog modal-xl" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Program Results</h5>
@@ -221,14 +232,28 @@ export const Home = () => {
                           <th>Program Name</th>
                           <th>College Name</th>
                           <th>Level</th>
+                          <th>Program Length</th>
+                          <th>Application Deadline</th>
+                          <th>Program Link</th>
                         </tr>
                       </thead>
                       <tbody>
                         {programs.map((program, index) => (
                           <tr key={index}>
-                            <td>{program.PName}</td>
-                            <td>{program.College.Name}</td>
-                            <td>{program.PLevel}</td>
+                            <td>{program.programName}</td>
+                            <td>{program.college.collegeName}</td>
+                            <td>{program.programLevel}</td>
+                            <td>{program.programLength}</td>
+                            <td>{program.appDeadline}</td>
+                            <td>
+                              <a
+                                href={program.programLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                View Program
+                              </a>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -253,7 +278,7 @@ export const Home = () => {
       )}
       {showCollegeModal && (
         <div className="modal fade show d-block" tabIndex="-1" role="dialog">
-          <div className="modal-dialog modal-lg" role="document">
+          <div className="modal-dialog modal-xl" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">College Results</h5>
@@ -271,23 +296,37 @@ export const Home = () => {
                         <tr>
                           <th>College Name</th>
                           <th>City</th>
+                          <th>State</th>
                           <th>Country</th>
-                          <th>Link</th>
-                          <th>Ug Number</th>
-                          <th>Pg Number</th>
+                          <th>Environment</th>
+                          <th>UG Number</th>
+                          <th>PG Number</th>
                           <th>US Ranking</th>
+                          <th>QS Ranking</th>
+                          <th>College Link</th>
                         </tr>
                       </thead>
                       <tbody>
                         {colleges.map((college, index) => (
                           <tr key={index}>
-                            <td>{college.Name}</td>
-                            <td>{college.City}</td>
-                            <td>{college.Country}</td>
-                            <td>{college.Link}</td>
-                            <td>{college.UGNumber}</td>
-                            <td>{college.PGNumber}</td>
-                            <td>{college.USRanking || "N/A"}</td>
+                            <td>{college.collegeName}</td>
+                            <td>{college.city}</td>
+                            <td>{college.state || "N/A"}</td>
+                            <td>{college.country}</td>
+                            <td>{college.environment}</td>
+                            <td>{college.ugNumber}</td>
+                            <td>{college.pgNumber}</td>
+                            <td>{college.usRanking || "N/A"}</td>
+                            <td>{college.qsRanking || "N/A"}</td>
+                            <td>
+                              <a
+                                href={`https://${college.collegeLink}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                Visit College
+                              </a>
+                            </td>
                           </tr>
                         ))}
                       </tbody>

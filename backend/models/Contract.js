@@ -15,6 +15,7 @@ const Contract = sequelize.define(
     finishDate: { type: DataTypes.DATE, allowNull: false },
     agent: { type: DataTypes.CHAR, allowNull: true },
     amount: { type: DataTypes.DECIMAL(10, 2), allowNull: true },
+    contractName: { type: DataTypes.STRING(100), allowNull: false },
   },
   {
     tableName: "contract",

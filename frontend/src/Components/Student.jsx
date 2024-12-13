@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AppNavbar } from "./Navbar";
+
 import "../Css/home.css";
 import { BASE_URL } from "../../Constant/constant";
 import { Link } from "react-router-dom";
@@ -54,7 +54,6 @@ export const Student = () => {
 
   return (
     <>
-      <AppNavbar />
       <div className="container mt-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h1 className="page-title">Student Management</h1>

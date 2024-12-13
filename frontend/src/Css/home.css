@@ -1,4 +1,4 @@
-
+/* 
 .container {
   max-width: 800px;
 }
@@ -79,10 +79,10 @@ h3 {
   background-color: #4CAF50;
   border-color: #4CAF50;
   transform: scale(1.05);
-}
+} */
 
 
-/* 
+
 
 .container {
   max-width: 800px;
@@ -164,4 +164,5 @@ h3 {
   background-color: #4CAF50;
   border-color: #4CAF50;
   transform: scale(1.05);
-} */
+} 
+

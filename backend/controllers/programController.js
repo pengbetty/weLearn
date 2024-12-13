@@ -70,7 +70,7 @@ exports.getPrograms = [
     try {
       const programs = await Program.findAll({
         where: {
-          PLevel,
+          programLevel,
           ...(programName && {
             programName: { [Op.like]: `%${programName}%` },
           }),
@@ -80,14 +80,14 @@ exports.getPrograms = [
           {
             model: College,
             where: { Country: country },
-            attributes: ["Name"],
+            attributes: ["collegeName"],
           },
         ],
       });
 
       res.status(200).json({ programs });
     } catch (error) {
-      res.status(500).json({ message: "Database error", error });
+      res.status(500).json({ message: error.message });
     }
   },
 ];

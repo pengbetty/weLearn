@@ -8,7 +8,6 @@ exports.createContract = [
   body("userID").notEmpty().withMessage("User ID is required"),
   body("startDate").notEmpty().withMessage("Start date is required"),
   body("finishDate").notEmpty().withMessage("Finish date is required"),
-  body("agent").notEmpty().withMessage("Agent Name is required"),
   body("contractName").notEmpty().withMessage("Contract Name is required"),
   body("amount")
     .isDecimal()
@@ -20,8 +19,9 @@ exports.createContract = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { userID, contractName, startDate, finishDate, agent, amount } =
-      req.body;
+    const { userID, contractName, startDate, finishDate, amount } = req.body;
+
+    const agentName = req.user?.name || "Unknown Agent";
 
     try {
       const existingContract = await Contract.findOne({
@@ -40,13 +40,15 @@ exports.createContract = [
         contractName,
         startDate,
         finishDate,
-        agent,
+        agent: agentName,
         amount,
       });
 
       res.status(201).json({
         message: "Contract created successfully",
         contractId: contract.contractID,
+        agent: agentName,
+        contractName,
       });
     } catch (error) {
       res.status(500).json({ message: "Database error", error });
@@ -93,11 +95,15 @@ exports.updateContract = [
     .optional()
     .notEmpty()
     .withMessage("Contract Name is required."),
-  body("agent").optional().notEmpty().withMessage("Agent Name is required."),
 
   async (req, res) => {
     const { id } = req.params;
-    const { startDate, finishDate, amount, agent } = req.body;
+    const { startDate, finishDate, amount, contractName } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
       const contract = await Contract.findByPk(id);
@@ -106,10 +112,17 @@ exports.updateContract = [
         return res.status(404).json({ message: "Contract not found" });
       }
 
-      await contract.update({ startDate, finishDate, amount, agent });
-      res
-        .status(200)
-        .json({ message: "Contract updated successfully", contract });
+      await contract.update({
+        startDate,
+        finishDate,
+        amount,
+        contractName,
+      });
+
+      res.status(200).json({
+        message: "Contract updated successfully",
+        contract,
+      });
     } catch (error) {
       res.status(500).json({ message: "Database error", error });
     }
@@ -124,7 +137,7 @@ exports.getContractById = async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["username", "displayname", "email"],
+          attributes: ["userName", "displayName", "email"],
         },
       ],
     });
