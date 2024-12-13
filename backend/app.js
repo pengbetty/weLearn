@@ -19,6 +19,9 @@ const College = require("./models/College");
 
 defineAssociations();
 
+app.get("/", (req, res) => {
+  res.send("Your app is deployed");
+});
 // Middleware
 app.use(express.json());
 const routes = require("./routes/routes");
